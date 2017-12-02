@@ -22,10 +22,21 @@ public class CadastrarUsuario  extends JFrame{
 	private static final long serialVersionUID = 1987604675648829199L;
 	
 	private JPanel contentPane = null;
+	//Declarações no corpo da classe
+	JTextField textCod =  new JTextField();
+	JTextField textUsuario = new JTextField();
+	JTextField textCPF = new JTextField();
+	JTextField textLogin = new JTextField();
+	JPasswordField textSenha = new JPasswordField();
+	JPasswordField textSenhaComfirma = new JPasswordField();
+	JRadioButton admRadioButton = new JRadioButton();
+	JRadioButton gerenciaRadioButton = new JRadioButton();
+	JRadioButton usuarioRadioButton = new JRadioButton();
+	//Fim declarações
 	
 	public CadastrarUsuario(){		
 		this.setSize(470, 305);
-		this.setTitle("Cadastro de Usu�rio");
+		this.setTitle("Cadastro de Usuário");
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.setLocationRelativeTo(null);
 		setResizable(false);
@@ -46,7 +57,6 @@ public class CadastrarUsuario  extends JFrame{
 		codVeiculo.setText("Codigo:");
 		centerPanel.add(codVeiculo);				
 		
-		JTextField textCod = new JTextField();
 		textCod.setColumns(4);
 		centerPanel.add(textCod);
 		
@@ -61,10 +71,9 @@ public class CadastrarUsuario  extends JFrame{
 		
 		JLabel nomeUsuario = new JLabel();
 		nomeUsuario.setBorder(new EmptyBorder(10, 0, 0, 0));
-		nomeUsuario.setText("Nome do Usu�rio:  ");
+		nomeUsuario.setText("Nome do Usuário:  ");
 		centerPanel.add(nomeUsuario);
 		
-		JTextField textUsuario = new JTextField();
 		textUsuario.setColumns(33);
 		centerPanel.add(textUsuario);
 		
@@ -78,11 +87,9 @@ public class CadastrarUsuario  extends JFrame{
 		loginUsuario.setText("                                                             Login:  ");
 		centerPanel.add(loginUsuario);
 						
-		JTextField textCPF = new JTextField();
 		textCPF.setColumns(16);
 		centerPanel.add(textCPF);
 		
-		JTextField textLogin = new JTextField();
 		textLogin.setColumns(16);
 		centerPanel.add(textLogin);
 		
@@ -96,11 +103,9 @@ public class CadastrarUsuario  extends JFrame{
 		senhaConfirmaUsuario.setText("                                                    Confirmar Senha:  ");
 		centerPanel.add(senhaConfirmaUsuario);
 		
-		JPasswordField textSenha = new JPasswordField();
 		textSenha.setColumns(16);
 		centerPanel.add(textSenha);
 		
-		JPasswordField textSenhaComfirma = new JPasswordField();
 		textSenhaComfirma.setColumns(16);
 		centerPanel.add(textSenhaComfirma);
 		
@@ -111,14 +116,14 @@ public class CadastrarUsuario  extends JFrame{
 		acessoUsuario.setFont(new Font("Dialog", Font.CENTER_BASELINE, 14));
 		centerPanel.add(acessoUsuario);
 		
-		JRadioButton admRadioButton = new JRadioButton("Administrador");
+		admRarioButton.setText("Administrador");
 		admRadioButton.setBackground(Color.lightGray);
 		admRadioButton.setSelected(false);
 	    
-	    JRadioButton gerenciaRadioButton = new JRadioButton("Ger�ncia");
+	    gerenciaRadioButton.setText("Gerência");
 	    gerenciaRadioButton.setBackground(Color.lightGray);
 	    
-	    JRadioButton usuarioRadioButton = new JRadioButton("Usu�rio");
+	    usuarioRadioButton.setText("Usuário");
 	    usuarioRadioButton.setBackground(Color.lightGray);
 	    
 	    ButtonGroup group = new ButtonGroup();
@@ -132,8 +137,8 @@ public class CadastrarUsuario  extends JFrame{
 		
 //		JComboBox<String> courseComboBox = new JComboBox<>();
 //		courseComboBox.addItem("Administrador");
-//		courseComboBox.addItem("Ger�ncia");
-//		courseComboBox.addItem("Usu�rio");
+//		courseComboBox.addItem("Gerência");
+//		courseComboBox.addItem("Usuário");
 //		
 //		courseComboBox.setPreferredSize(new Dimension(400, 30));		
 //		centerPanel.add(courseComboBox);
@@ -172,10 +177,18 @@ public class CadastrarUsuario  extends JFrame{
 	}
 	
 	private void cadastraUsuario(){
-		int codUsuario;
-		String nome;
-		int cpf;
-		String senha;
+		//Extraindo informações dos campos
+		int codUsuario = Integer.valueOf(textCod.getText()); //Transformando String em Int
+		String nome = textUsuario.getText();
+		int cpf = Integer.valueOf(textCPF.getText()) ; //Transformando String em Int
+		String senha = new String(textSenha.getPassword()) ; //Transformando password em String
+		
+		//Montando TO
+		CadastrarUsuarioTO usuario = new CadastrarUsuarioTO(codUsuario, nome, cpf, senha);
+
+		//Inserindo usuario no banco de dados - Sem uso de controller.
+		CadastrarUsuarioDAO dao = new CadastrarUsuarioDAO();
+		dao.insertNewCadastrarUsuario(usuario); //Enviando to para o banco de dados.
 	}
 	
 	public static void main(String[] args){
