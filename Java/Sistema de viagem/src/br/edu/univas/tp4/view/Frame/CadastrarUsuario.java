@@ -25,7 +25,7 @@ public class CadastrarUsuario  extends JFrame{
 	
 	public CadastrarUsuario(){		
 		this.setSize(470, 305);
-		this.setTitle("Cadastro de Usu·rio");
+		this.setTitle("Cadastro de Usu√°rio");
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.setLocationRelativeTo(null);
 		setResizable(false);
@@ -61,7 +61,7 @@ public class CadastrarUsuario  extends JFrame{
 		
 		JLabel nomeUsuario = new JLabel();
 		nomeUsuario.setBorder(new EmptyBorder(10, 0, 0, 0));
-		nomeUsuario.setText("Nome do Usu·rio:  ");
+		nomeUsuario.setText("Nome do Usu√°rio:  ");
 		centerPanel.add(nomeUsuario);
 		
 		JTextField textUsuario = new JTextField();
@@ -115,10 +115,10 @@ public class CadastrarUsuario  extends JFrame{
 		admRadioButton.setBackground(Color.lightGray);
 		admRadioButton.setSelected(false);
 	    
-	    JRadioButton gerenciaRadioButton = new JRadioButton("GerÍncia");
+	    JRadioButton gerenciaRadioButton = new JRadioButton("Ger√™ncia");
 	    gerenciaRadioButton.setBackground(Color.lightGray);
 	    
-	    JRadioButton usuarioRadioButton = new JRadioButton("Usu·rio");
+	    JRadioButton usuarioRadioButton = new JRadioButton("Usu√°rio");
 	    usuarioRadioButton.setBackground(Color.lightGray);
 	    
 	    ButtonGroup group = new ButtonGroup();
@@ -132,8 +132,8 @@ public class CadastrarUsuario  extends JFrame{
 		
 //		JComboBox<String> courseComboBox = new JComboBox<>();
 //		courseComboBox.addItem("Administrador");
-//		courseComboBox.addItem("GerÍncia");
-//		courseComboBox.addItem("Usu·rio");
+//		courseComboBox.addItem("Ger√™ncia");
+//		courseComboBox.addItem("Usu√°rio");
 //		
 //		courseComboBox.setPreferredSize(new Dimension(400, 30));		
 //		centerPanel.add(courseComboBox);
@@ -176,8 +176,24 @@ public class CadastrarUsuario  extends JFrame{
 		String nome;
 		int cpf;
 		String senha;
+
+		if(senhaCorreta){
+			//coloca aqui o insert do dao
+		}else{
+			JOptionPane.showMessage(this, "senhas n√£o est√£o iguais.");
+		}		
 	}
 	
+	//Valida se senhas est√£o certas.
+	private boolean senhaCorreta(){
+		String senha1 = new String(textSenha.getPassword()).trim();
+		String senha2 = new String(textSenhaComfirma.getPassword()).trim();
+		
+		if(senha1.equals(senha2)){
+			return true;
+		}
+		return false;
+	}
 	public static void main(String[] args){
 		Frame.setlookAndFeel(Frame.ACRYL);
 		CadastrarUsuario tela = new CadastrarUsuario();
